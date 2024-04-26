@@ -1,6 +1,6 @@
 import BaseCommand from "./utils/BaseCommand";
 import { config } from "dotenv";
-import { Collection } from "discord.js";
+import { ActivityType, Collection } from "discord.js";
 import fs from "fs";
 import path from "path";
 import { REST } from "@discordjs/rest";
@@ -28,13 +28,14 @@ client.on("ready", async () => {
     const player = useMainPlayer();
     const guild_ids = client.guilds.cache.map(guild => guild.id);
     const rest = new REST({ version: "10" }).setToken(process.env.TOKEN as string);
+    await player.extractors.loadDefault();
+    client.user?.setActivity("/play", { type: ActivityType.Listening });
     for(const guildId of guild_ids) {
         try {
             await rest.put(
                 Routes.applicationGuildCommands(process.env.CLIENT_ID as string, guildId),
                 { body: commands },
             );
-            await player.extractors.loadDefault();
             console.log("Successfully registered application commands.");
         } catch (error) {
             console.error(error);
