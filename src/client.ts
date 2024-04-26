@@ -1,4 +1,5 @@
-const { Client, Collection, GatewayIntentBits } = require("discord.js");
+import { Client, Collection, GatewayIntentBits } from "discord.js";
+import MyClient from "./utils/MyClient";
 
 const client = new Client({
     intents: [
@@ -6,6 +7,6 @@ const client = new Client({
             GatewayIntentBits.GuildMessages,
             GatewayIntentBits.GuildVoiceStates,
         ],
-});
+}) as MyClient;
 
-module.exports = client;
+export default client;

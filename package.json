@@ -6,7 +6,9 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +22,12 @@
     "discord-player": "^6.6.8",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
+    "mediaplex": "^0.0.9",
     "youtube-ext": "^1.1.23"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }
